@@ -1,4 +1,34 @@
-@use "palette.scss";
+@use "palette.scss" as i;
 body {
-    color: palette.$viridian-green;
+    margin-right: auto;
+    margin-left: auto;
+    color: i.$viridian-green;
+    font-weight: bold;
+    box-sizing: border-box;
+}
+
+@media screen and (min-width:320px) {
+    body {
+        width: 70%;
+    }
+}
+
+#container {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: repeat(6, 40px);
+    align-content: center;
+    justify-content: center;
+    gap: 0.5vw;
+}
+
+.item {
+    display: flex;
+    border: 2px solid i.$charcoal;
+    justify-content: center;
+    align-items: center;
+}
+
+#display {
+    grid-column: 1 /span 4;
 }

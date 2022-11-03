@@ -3,5 +3,34 @@
 /* SCSS RGB */
 /* SCSS Gradient */
 body {
+  margin-right: auto;
+  margin-left: auto;
   color: rgb(12, 164, 165);
+  font-weight: bold;
+  box-sizing: border-box;
+}
+
+@media screen and (min-width: 320px) {
+  body {
+    width: 70%;
+  }
+}
+#container {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-template-rows: repeat(6, 40px);
+  align-content: center;
+  justify-content: center;
+  gap: 0.5vw;
+}
+
+.item {
+  display: flex;
+  border: 2px solid rgb(54, 71, 79);
+  justify-content: center;
+  align-items: center;
+}
+
+#display {
+  grid-column: 1/span 4;
 }/*# sourceMappingURL=style.css.map */
