@@ -72,4 +72,8 @@ body {
 
 .item:hover {
   cursor: pointer;
+}
+
+#equal {
+  grid-column: 3/span 2;
 }/*# sourceMappingURL=style.css.map */
