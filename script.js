@@ -17,41 +17,34 @@ let resultCalculation = 0;
 pad.forEach((elm) =>
   elm.addEventListener("click", (evt) => {
     if (operatorOutput == null) {
-      if (resultCalculation == 0) {
-        number = number + evt.target.innerHTML;
-        display.innerHTML = number;
-      } else if (resultCalculation !== 0) {
+      if (resultCalculation !== 0) {
         number = "";
         resultCalculation = 0;
-        number = number + evt.target.innerHTML;
-        display.innerHTML = number;
       }
+      number = number + evt.target.innerHTML;
+      display.innerHTML = number;
     } else if (operatorOutput !== null) {
-      if (resultCalculation == 0) {
-        if (secondOperatorOutput == null) {
-          secondNumber = secondNumber + evt.target.innerHTML;
-          display.innerHTML = secondNumber;
-        } else if (secondOperatorOutput !== null) {
-          thirdNumber = thirdNumber + evt.target.innerHTML;
-          if (secondOperatorOutput == "+" || secondOperatorOutput == "-") {
-            number = runCalculation(operatorOutput, number, secondNumber);
-            secondNumber = thirdNumber;
-          } else if (
-            secondOperatorOutput == "\xD7" ||
-            secondOperatorOutput == "\xF7"
-          ) {
-            secondNumber = runCalculation(
-              secondOperatorOutput,
-              secondNumber,
-              thirdNumber
-            );
-          }
-          display.innerHTML = thirdNumber;
-        }
-      } else if (resultCalculation !== 0) {
-        resultCalculation = 0;
+      if (secondOperatorOutput == null) {
         secondNumber = secondNumber + evt.target.innerHTML;
         display.innerHTML = secondNumber;
+      } else if (secondOperatorOutput !== null) {
+        thirdNumber = thirdNumber + evt.target.innerHTML;
+        if (secondOperatorOutput == "+" || secondOperatorOutput == "-") {
+          number = runCalculation(operatorOutput, number, secondNumber);
+          secondNumber = thirdNumber;
+          operatorOutput = secondOperatorOutput;
+        } else if (
+          secondOperatorOutput == "\xD7" ||
+          secondOperatorOutput == "\xF7"
+        ) {
+          secondNumber = runCalculation(
+            secondOperatorOutput,
+            secondNumber,
+            thirdNumber
+          );
+        }
+        display.innerHTML = thirdNumber;
+        thirdNumber = "";
       }
     }
   })
@@ -74,6 +67,7 @@ reset.addEventListener("click", clearAll);
 function clearAll() {
   number = "";
   secondNumber = "";
+  thirdNumber = "";
   operatorOutput = null;
   secondOperatorOutput = null;
   display.innerHTML = 0;
@@ -81,6 +75,7 @@ function clearAll() {
 }
 
 deleteNum.addEventListener("click", () => {
+  number = number.toString();
   number = number.slice(0, number.length - 1);
   if (number.length >= 1) {
     display.innerHTML = number;
@@ -110,5 +105,7 @@ function displayResult() {
   display.innerHTML = resultCalculation;
   number = resultCalculation;
   secondNumber = "";
+  thirdNumber = "";
   operatorOutput = null;
+  secondOperatorOutput = null;
 }
